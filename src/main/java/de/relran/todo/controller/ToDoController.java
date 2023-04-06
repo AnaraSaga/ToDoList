@@ -24,15 +24,23 @@ public class ToDoController {
     }
 
     //find and get all ToDos
-    @GetMapping("/todo")                     // .../api/todo
+    @GetMapping("/todos")                     // .../api/todos
     public ResponseEntity<Iterable<ToDo>> getTodos() {
         return ResponseEntity.ok(repository.findAll());
     }
 
+    //find by id
     @GetMapping("/todo/{id}")
     public ResponseEntity<ToDo> getTodoById(@PathVariable String id) {
         return ResponseEntity.ok(repository.findById(id));
     }
+
+    //find by key (id)
+    @GetMapping("/todo")
+    public ResponseEntity<ToDo> getTodoById2(@RequestParam String id) {
+        return ResponseEntity.ok(repository.findById(id));
+    }
+
 
     //this method allows to create and update
     @RequestMapping(value = "/todo", method = {RequestMethod.POST, RequestMethod.PUT})

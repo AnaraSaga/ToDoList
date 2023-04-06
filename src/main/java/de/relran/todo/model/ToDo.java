@@ -1,5 +1,6 @@
 package de.relran.todo.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -19,9 +20,10 @@ public class ToDo {
     @NotBlank
 
     private String description;
-
+    @JsonFormat(pattern = "dd-MM-yyyy HH-mm", timezone = "Europe/Zagreb")
     private LocalDateTime created;
 
+    @JsonFormat(pattern = "dd-MM-yyyy HH-mm", timezone = "Europe/Zagreb")
     private LocalDateTime modified;
 
     private boolean completed;
