@@ -17,7 +17,7 @@ public class ToDoRepository implements CommonRepository<ToDo> {
     @Override
     public ToDo save(ToDo entity) {
         ToDo result = toDos.get(entity.getId());                //search todo in DB by method get
-        if (result != null){
+        if (result != null) {
             // means there is entity in toDos -> update entry then update
             result.setModified(LocalDateTime.now());            //update time
             result.setDescription(entity.getDescription());     //update description
@@ -30,21 +30,24 @@ public class ToDoRepository implements CommonRepository<ToDo> {
 
     @Override
     public Iterable<ToDo> saveAll(Collection<ToDo> entities) {
-        return null;
+        entities.forEach(this::save);                       //forEach(entity->save(entity));
+        return findAll();
     }
 
     @Override
     public void delete(ToDo entity) {
-
+        toDos.remove(entity.getId());
     }
 
     @Override
     public ToDo findById(String id) {
-        return null;
+        return toDos.get(id);
     }
 
+    //todo: write method which returns toDos sorted by created date
     @Override
     public Iterable<ToDo> findAll() {
-        return null;
+        return toDos.values();
     }
+
 }
